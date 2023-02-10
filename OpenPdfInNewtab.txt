@@ -1,0 +1,54 @@
+ublic class PDFInNewBrowser {
+
+    WebDriver driver;
+
+    String url = "orginal url";
+
+    String pdfUrl;
+
+    @BeforeTest
+
+    public void setUp() {
+
+     driver.get(url);
+     driver.findElement(By.xpath("xpath of the link on which we click to downlao [pdf")).click();
+
+     pdfUrl = driver.getCurrentUrl();
+
+    }
+
+    @Test
+
+    public void verifyTextFromPDF() {
+
+  
+
+     String pdfContent = getPdfContent(pdfUrl);
+
+     
+
+     }
+
+    
+
+    public static String getPdfContent(String url) throws IOException {
+
+     URL pdfURL = new URL(url);
+
+     InputStream is = pdfURL.openStream();
+
+     BufferedInputStream bis = new BufferedInputStream(is);
+
+     PDDocument doc = PDDocument.load(bis);
+
+     PDFTextStripper strip = new PDFTextStripper();
+
+     String stripText = strip.getText(doc);
+
+     System.out.println(stripText);
+
+     doc.close();
+
+     return stripText;
+
+    }
