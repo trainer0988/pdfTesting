@@ -18,9 +18,9 @@ public class DatabaseReader {
 	}
 	
 	
-	public String getValueFromDB(Object value)
+	public String getValueFromDB(String value)
 	{
-		return  valueInDb.getProperty(value.toString());
+		return  valueInDb.getProperty(value);
 	}
 	
 

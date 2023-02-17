@@ -8,36 +8,33 @@ import org.testng.annotations.Test;
 
 import utility.DatabaseReader;
 import utility.Keys;
-import utility.PdfReader;
+import utility.PdfKeysReader;
+
 
 public class PdfTest {
-	
-	protected PdfReader pdfReader;
+
+	protected PdfKeysReader pdfKeysReader;
 	protected DatabaseReader databaseReader;
-	
+
 	@BeforeClass
-	public void SetUp() throws Exception
-	{
+	public void SetUp() throws Exception {
 		File pdf = new File("D:\\workspace\\pdf_Testing\\pdftesting\\pdfForTesting.pdf");
-		pdfReader = new PdfReader();
-		pdfReader.read(pdf);
+		pdfKeysReader = new PdfKeysReader();
+		pdfKeysReader.read(pdf);
 		databaseReader = new DatabaseReader();
-		
-		
-		
+
 	}
-	
+
 	@Test
-	public void verfyPanNo()
-	{
-		String panNoINPdf = pdfReader.getPdfData().get(Keys.PANNo);
-		
+	public void verfyPanNo() {
+		String panNoINPdf = pdfKeysReader.getDataFromPdf(Keys.PANNo);
+		System.out.println(panNoINPdf);
+
 		String panNoInDB = databaseReader.getValueFromDB(Keys.PANNo);
-		
-		Assert.assertEquals(panNoINPdf, panNoInDB);;
-		
-		
-		
+		System.out.println(panNoInDB);
+
+		Assert.assertEquals(panNoINPdf, panNoInDB);
+
 	}
 
 }
