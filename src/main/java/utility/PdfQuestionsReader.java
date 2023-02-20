@@ -41,9 +41,15 @@ public class PdfQuestionsReader extends PDFTextStripper {
 			stripper.writeText(document, dummy);
 
 			// print lines
+			
 			/*
-			 * for (String line : lines) { System.out.println(line); }
+			 * for (String line : lines)
+			 * 
+			 * { System.out.println(line);
+			 * 
+			 * }
 			 */
+			 
 			setKeys();
 		} finally {
 			if (document != null) {
@@ -54,7 +60,9 @@ public class PdfQuestionsReader extends PDFTextStripper {
 	
 public String getDataFromPdf(String key) {
 		
+	System.out.println(pdfData);
 		return pdfData.get(key);
+		
 	}
 
 	/**
@@ -69,11 +77,20 @@ public String getDataFromPdf(String key) {
 	public static void setKeys() throws FileNotFoundException, IOException {
 
 		for (int i = 0; i < lines.size(); i++) {
+			
+			System.out.println("Line number : " +i + " value : "+lines.get(i));
 
 			switch (lines.get(i)) {
 
 			case Keys.QUESTION1:
 				pdfData.put(Keys.QUESTION1, lines.get(i + 1));
+				break;
+				
+			case Keys.QUESTION2:
+				if(lines.get(i-1).trim().equals(Keys.line81))
+				{
+				pdfData.put(Keys.QUESTION2, lines.get(i+1));
+				}
 				break;
 			}
 
